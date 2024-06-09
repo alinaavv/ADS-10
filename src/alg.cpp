@@ -6,22 +6,8 @@
 #include <vector>
 #include  "tree.h"
 
-struct Tree {
-    char value;
-    std::vector<Tree*> children;
-    Tree(char val) : value(val) {}
-    ~Tree() {
-        for (auto child : children) {
-            delete child;
-        }
-    }
-    void addChild(Tree* child) {
-        children.push_back(child);
-    }
-};
-
-std::vector<char> getPerm(Tree* tree, int n,
-                int& count, std::vector<char>& perm) {
+std::vector<char> getPerm(Tree* tree, int n, int& count,
+                          std::vector<char>& perm) {
     if (!tree) {
         return {};
     }
