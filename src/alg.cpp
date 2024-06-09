@@ -6,28 +6,45 @@
 #include <vector>
 #include  "tree.h"
 
-std::vector<char> getPerm(const Tree& tree, int n, int* count,
-                          std::vector<char>* permutation) {
-    if (tree.children.empty()) {
-        (*count)++;
-        if (*count == n) {
-            return *permutation;
+struct Tree {
+    char value;
+    std::vector<Tree*> children;
+    Tree(char val) : value(val) {}
+    ~Tree() {
+        for (auto child : children) {
+            delete child;
+        }
+    }
+    void addChild(Tree* child) {
+        children.push_back(child);
+    }
+};
+
+std::vector<char> getPerm(Tree* tree, int n,
+                int& count, std::vector<char>& perm) {
+    if (!tree) {
+        return {};
+    }
+    perm.push_back(tree->value);
+    if (tree->children.empty()) {
+        count++;
+        if (count == n) {
+            return perm;
         }
     } else {
-        for (Tree* child : tree.children) {
-            permutation->push_back(child->value);
-            auto result = getPerm(*child, n, count, permutation);
+        for (Tree* child : tree->children) {
+            auto result = getPerm(child, n, count, perm);
             if (!result.empty()) {
                 return result;
             }
-            permutation->pop_back();
         }
     }
+    perm.pop_back();
     return {};
 }
 
-std::vector<char> getPerm(const Tree& tree, int n) {
+std::vector<char> getPermWrapper(Tree* tree, int n) {
     int count = 0;
-    std::vector<char> permutation;
-    return getPerm(tree, n, &count, &permutation);
+    std::vector<char> perm;
+    return getPerm(tree, n, count, perm);
 }
