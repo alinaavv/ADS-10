@@ -7,25 +7,25 @@
 #include  "tree.h"
 
 std::vector<char> getPerm(Tree* tree, int n, int& count,
-                          std::vector<char>& perm) {
+                          const std::vector<char>& perm) {
     if (!tree) {
         return {};
     }
-    perm.push_back(tree->value);
+    std::vector<char> new_perm = perm;
+    new_perm.push_back(tree->value);
     if (tree->children.empty()) {
         count++;
         if (count == n) {
-            return perm;
+            return new_perm;
         }
     } else {
         for (Tree* child : tree->children) {
-            auto result = getPerm(child, n, count, perm);
+            auto result = getPerm(child, n, count, new_perm);
             if (!result.empty()) {
                 return result;
             }
         }
     }
-    perm.pop_back();
     return {};
 }
 
