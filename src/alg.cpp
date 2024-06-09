@@ -6,10 +6,10 @@
 #include <vector>
 #include  "tree.h"
 
-std::vector<char> getPerm(const Tree& tree, int n, const int& count, std::vector<char>& permutation) {
+std::vector<char> getPerm(const Tree& tree, int n, int* count, std::vector<char>& permutation) {
     if (tree.children.empty()) {
-        count++;
-        if (count == n) {
+        (*count)++;
+        if (*count == n) {
             return permutation;
         }
     } else {
@@ -22,11 +22,11 @@ std::vector<char> getPerm(const Tree& tree, int n, const int& count, std::vector
             permutation.pop_back();
         }
     }
-  return {};
+    return {};
 }
 
 std::vector<char> getPerm(const Tree& tree, int n) {
-  int count = 0;
+    int count = 0;
     std::vector<char> permutation;
-    return getPerm(tree, n, count, permutation);
+    return getPerm(tree, n, &count, permutation);
 }
