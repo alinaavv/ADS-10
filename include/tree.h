@@ -2,6 +2,7 @@
 #ifndef INCLUDE_TREE_H_
 #define INCLUDE_TREE_H_
 #include <vector>
+#include <algorithm>
 
 class Tree {
  public:
@@ -14,7 +15,8 @@ class Tree {
             elements.erase(elements.begin());
             for (char elem : elements) {
                 std::vector<char> next_elements = elements;
-                next_elements.erase(std::remove(next_elements.begin(), next_elements.end(), elem), next_elements.end());
+                next_elements.erase(std::remove(next_elements.begin(),
+                  next_elements.end(), elem), next_elements.end());
                 children.push_back(new Tree(next_elements));
             }
         }
