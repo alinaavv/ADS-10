@@ -1,13 +1,14 @@
 // Copyright 2022 NNTU-CS
 #ifndef INCLUDE_TREE_H_
 #define INCLUDE_TREE_H_
+#include <vector>
 
 class Tree {
-public:
+ public:
     char value;
     std::vector<Tree*> children;
 
-    Tree(std::vector<char> elements) {
+    explicit Tree(std::vector<char> elements) {
         if (!elements.empty()) {
             value = elements[0];
             elements.erase(elements.begin());
