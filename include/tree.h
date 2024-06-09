@@ -6,20 +6,18 @@
 
 class Tree {
  public:
-    char value;
-    std::vector<Tree*> children;
-
     explicit Tree(char val) : value(val) {}
-
     ~Tree() {
         for (Tree* child : children) {
             delete child;
         }
     }
-
     void addChild(Tree* child) {
         children.push_back(child);
     }
+
+    char value;
+    std::vector<Tree*> children;
 };
 
 #endif  // INCLUDE_TREE_H_
