@@ -3,14 +3,8 @@
 #include  <fstream>
 #include  <locale>
 #include  <cstdlib>
-#include <vector> 
+#include <vector>
 #include  "tree.h"
-
-std::vector<char> getPerm(const Tree& tree, int n) {
-  int count = 0;
-    std::vector<char> permutation;
-    return getPerm(tree, n, count, permutation);
-}
 
 std::vector<char> getPerm(const Tree& tree, int n, int& count, std::vector<char>& permutation) {
     if (tree.children.empty()) {
@@ -30,4 +24,12 @@ std::vector<char> getPerm(const Tree& tree, int n, int& count, std::vector<char>
     }
   return {};
 }
+
+std::vector<char> getPerm(const Tree& tree, int n) {
+  int count = 0;
+    std::vector<char> permutation;
+    return getPerm(tree, n, count, permutation);
+}
+
+
   
